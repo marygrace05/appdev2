@@ -8,9 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $sql = "INSERT INTO students (name, email, course) VALUES (:name, :email, :course)";
     $stmt = $pdo->prepare($sql);
-    
-    if ($stmt->execute(['name' => $name, 'email' => $email, 'course' => $course])) {
-        echo "Student added successfully!";
+
+    if ($stmt->execute([
+        'name' => $name,
+        'email' => $email,
+        'course' => $course
+    ])) {
+        header("Location: index.php");
+        exit(); // IMPORTANT
+    } else {
+        echo "Failed to add student!";
     }
 }
 ?>
