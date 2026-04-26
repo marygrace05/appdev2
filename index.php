@@ -15,10 +15,22 @@ $students = $stmt->fetchAll();
         <td><?= htmlspecialchars($s['name']) ?></td>
         <td><?= htmlspecialchars($s['email']) ?></td>
         <td><?= htmlspecialchars($s['course']) ?></td>
+        
         <td>
             <a href="edit.php?id=<?= $s['id'] ?>">Edit</a>
             <a href="delete.php?id=<?= $s['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
+            <button onclick="confirmDelete(<?php echo $row['id']; ?>)">Delete</button>
         </td>
     </tr>
+
+    <script>
+function confirmDelete(id) {
+    if (confirm("Are you sure you want to delete this record?")) {
+        window.location.href = "delete.php?id=" + id;
+    }
+}
+</script>
+
     <?php endforeach; ?>
 </table>
+
